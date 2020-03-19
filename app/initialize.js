@@ -11,7 +11,12 @@ ReactDOM.render(
 		<App>
 			<Switch>
 				<Route exact path="/homepage/" component={Home} />
-				<Route component={NotFound} />
+				<Route
+					render={() => {
+						window.location.replace('http://www.google.com');
+						return null;
+					}}
+				/>
 			</Switch>
 		</App>
 	</Router>,
