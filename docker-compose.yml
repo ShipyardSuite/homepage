@@ -22,7 +22,7 @@ services:
             - ./gateway/system.config.yml:/usr/src/app/config/system.config.yml
             - ./gateway/gateway.config.yml:/usr/src/app/config/gateway.config.yml
         depends_on:
-            - template
+            - homepage
         networks:
             - gateway
 
@@ -37,11 +37,11 @@ services:
         networks:
             - gateway
 
-    template:
+    homepage:
         build: ./
-        container_name: template
+        container_name: homepage
         ports:
-            - "3000:3000"
+            - "5000:5000"
         volumes:
             - ./:/usr/src/app
         working_dir: /usr/src/app
@@ -54,6 +54,20 @@ services:
             SERVICE_NAME: ${SERVICE_NAME}
             DATABASE_URL: ${DATABASE_URL}
             SERVICE_PORT: ${SERVICE_PORT}
+            NEWRELIC_LICENSE: ${NEWRELIC_LICENSE}
+
+    template:
+        image: shipyardsuite/microservice-template:latest
+        container_name: template
+        ports:
+            - "3000:3000"
+        environment: 
+            SERVICE_NAME: template
+            SERVICE_PORT: 3000
+            DATABASE_URL: ${DATABASE_URL}
+            NEWRELIC_LICENSE: ${NEWRELIC_LICENSE}
+        networks: 
+            - gateway
 
 networks:
     gateway:

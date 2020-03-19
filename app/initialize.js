@@ -10,7 +10,7 @@ ReactDOM.render(
 	<Router>
 		<App>
 			<Switch>
-				<Route exact path="/template/" component={Home} />
+				<Route exact path="/homepage/" component={Home} />
 				<Route component={NotFound} />
 			</Switch>
 		</App>

@@ -1,7 +1,7 @@
 'use strict';
 
 exports.config = {
-	app_name: [ 'Template' ],
+	app_name: [ 'Homepage' ],
 	license_key: process.env.NEWRELIC_LICENSE,
 	logging: {
 		level: 'info'

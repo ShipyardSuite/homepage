@@ -1,30 +1,57 @@
 http:
-  port: 8080
+    port: 8080
 admin:
-  port: 9876
-  host: localhost
-apiEndpoints:
-  template:
+    port: 9876
     host: localhost
-    paths: [ '/template/*', '/template/api/*']
+apiEndpoints:
+    template:
+        host: localhost
+        paths: [ '/template/*', '/template/api/*']
+    api:
+        host: '*'
+        paths: '/ip'
+    homepage:
+        host: localhost
+        paths: [ '/homepage/*', '/homepage/api/*']
 serviceEndpoints:
-  template:
-    url: 'http://template:3000'
+    homepage:
+        url: 'http://homepage:5000'
+    template:
+        url: 'http://template:3000'
+    httpbin:
+        url: 'https://httpbin.org'
 policies:
-  - basic-auth
-  - cors
-  - expression
-  - key-auth
-  - log
-  - oauth2
-  - proxy
-  - rate-limit
+    - basic-auth
+    - cors
+    - expression
+    - key-auth
+    - log
+    - oauth2
+    - proxy
+    - rate-limit
 pipelines:
-  template:
-    apiEndpoints:
-      - template
-    policies:
-      - proxy:
-        - action:
-            serviceEndpoint: template 
-            changeOrigin: true
+    homepage:
+        apiEndpoints:
+            - homepage
+        policies:
+            - proxy:
+                - action:
+                    serviceEndpoint: homepage 
+                    changeOrigin: true
+    template:
+        apiEndpoints:
+            - template
+        policies:
+            - proxy:
+                - action:
+                    serviceEndpoint: template 
+                    changeOrigin: true
+    basic:
+        apiEndpoints:
+            - api
+        policies:
+            - proxy:
+                - action:
+                    serviceEndpoint: httpbin
+                    changeOrigin: true
+  

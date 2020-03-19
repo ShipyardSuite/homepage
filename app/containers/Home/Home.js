@@ -1,8 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-
-import { ExampleComponent } from './../../components/';
+import { NavLink } from 'react-router-dom';
 
 class Home extends Component {
 	constructor(props) {
@@ -12,11 +11,7 @@ class Home extends Component {
 	}
 
 	render() {
-		return (
-			<div>
-				<ExampleComponent url="/template/api/test" />
-			</div>
-		);
+		return <div>homepage...</div>;
 	}
 }
 
