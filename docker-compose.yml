@@ -52,7 +52,7 @@ services:
         build: ./
         container_name: homepage
         ports:
-            - "5000:5000"
+            - "${SERVICE_PORT}:${SERVICE_PORT}"
         volumes:
             - ./:/usr/src/app
         working_dir: /usr/src/app
@@ -63,8 +63,8 @@ services:
             - gateway
         environment:
             SERVICE_NAME: ${SERVICE_NAME}
-            DATABASE_URL: ${DATABASE_URL}
             SERVICE_PORT: ${SERVICE_PORT}
+            DATABASE_URL: ${DATABASE_URL}
 
 networks:
     gateway:
