@@ -1,14 +1,6 @@
 version: '2'
 services:
 
-    redis:
-        image: redis
-        container_name: redis
-        ports:
-            - "6379:6379"
-        networks:
-            - gateway
-
     gateway:
         build: 
             context: ./gateway
@@ -22,7 +14,16 @@ services:
             - ./gateway/system.config.yml:/usr/src/app/config/system.config.yml
             - ./gateway/gateway.config.yml:/usr/src/app/config/gateway.config.yml
         depends_on:
+            - notfound
             - homepage
+        networks:
+            - gateway
+
+    redis:
+        image: redis
+        container_name: redis
+        ports:
+            - "6379:6379"
         networks:
             - gateway
 
@@ -35,6 +36,16 @@ services:
         ports:
             - "27017:27017"
         networks:
+            - gateway
+
+    notfound:
+        image: shipyardsuite/notfound:develop
+        container_name: notfound
+        ports:
+            - "3003:3003"
+        environment:
+            SERVICE_PORT: 3003
+        networks: 
             - gateway
 
     homepage:
@@ -54,20 +65,6 @@ services:
             SERVICE_NAME: ${SERVICE_NAME}
             DATABASE_URL: ${DATABASE_URL}
             SERVICE_PORT: ${SERVICE_PORT}
-            NEWRELIC_LICENSE: ${NEWRELIC_LICENSE}
-
-    template:
-        image: shipyardsuite/microservice-template:latest
-        container_name: template
-        ports:
-            - "3000:3000"
-        environment: 
-            SERVICE_NAME: template
-            SERVICE_PORT: 3000
-            DATABASE_URL: ${DATABASE_URL}
-            NEWRELIC_LICENSE: ${NEWRELIC_LICENSE}
-        networks: 
-            - gateway
 
 networks:
     gateway:
