@@ -62,13 +62,25 @@ services:
 
     auth:
         image: shipyardsuite/auth:develop
-        container_name: dashboard
+        container_name: auth
         expose:
             - "3002"
         environment:
             SERVICE_NAME: auth
             DATABASE_URL: ${DATABASE_URL}
             SERVICE_PORT: 3002
+        networks: 
+            - gateway
+
+    user:
+        image: shipyardsuite/user:develop
+        container_name: user
+        expose:
+            - "3005"
+        environment:
+            SERVICE_NAME: user
+            DATABASE_URL: ${DATABASE_URL}
+            SERVICE_PORT: 3005
         networks: 
             - gateway
 
