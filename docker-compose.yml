@@ -41,18 +41,42 @@ services:
     notfound:
         image: shipyardsuite/notfound:develop
         container_name: notfound
-        ports:
-            - "3003:3003"
+        expose:
+            - "3003"
         environment:
             SERVICE_PORT: 3003
+        networks: 
+            - gateway
+
+    dashboard:
+        image: shipyardsuite/dashboard:develop
+        container_name: dashboard
+        expose:
+            - "3004"
+        environment:
+            SERVICE_NAME: dashboard
+            DATABASE_URL: ${DATABASE_URL}
+            SERVICE_PORT: 3004
+        networks: 
+            - gateway
+
+    auth:
+        image: shipyardsuite/auth:develop
+        container_name: dashboard
+        expose:
+            - "3002"
+        environment:
+            SERVICE_NAME: auth
+            DATABASE_URL: ${DATABASE_URL}
+            SERVICE_PORT: 3002
         networks: 
             - gateway
 
     homepage:
         build: ./
         container_name: homepage
-        ports:
-            - "${SERVICE_PORT}:${SERVICE_PORT}"
+        expose:
+            - "${SERVICE_PORT}"
         volumes:
             - ./:/usr/src/app
         working_dir: /usr/src/app
