@@ -1,8 +1,9 @@
 'use strict';
 
 import React, { Component } from 'react';
+import { PageLayout } from '../../components/';
 
-class Home extends Component {
+export default class Home extends Component {
 	constructor(props) {
 		super(props);
 
@@ -10,8 +11,6 @@ class Home extends Component {
 	}
 
 	render() {
-		return <div>Homepage...</div>;
+		return <PageLayout>Homepage</PageLayout>;
 	}
 }
-
-export default Home;

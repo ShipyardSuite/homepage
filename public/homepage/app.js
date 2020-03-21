@@ -162,6 +162,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _components = require('./components/');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -185,7 +187,8 @@ var App = function (_Component) {
 			return _react2.default.createElement(
 				'div',
 				null,
-				this.props.children
+				this.props.children,
+				_react2.default.createElement(_components.CookieConsentMessage, null)
 			);
 		}
 	}]);
@@ -196,8 +199,8 @@ var App = function (_Component) {
 exports.default = App;
 });
 
-require.register("components/ExampleComponent/ExampleComponent.js", function(exports, require, module) {
-"use strict";
+require.register("components/CookieConsentMessage/CookieConsentMessage.js", function(exports, require, module) {
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
@@ -205,9 +208,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _semanticUiReact = require('semantic-ui-react');
+
+var _storage = require('./../../utils/storage');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -217,81 +224,286 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ExampleComponent = function (_Component) {
-	_inherits(ExampleComponent, _Component);
+var CookieConsentMessage = function (_Component) {
+	_inherits(CookieConsentMessage, _Component);
 
-	function ExampleComponent(props) {
-		_classCallCheck(this, ExampleComponent);
+	function CookieConsentMessage(props) {
+		_classCallCheck(this, CookieConsentMessage);
 
-		var _this = _possibleConstructorReturn(this, (ExampleComponent.__proto__ || Object.getPrototypeOf(ExampleComponent)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (CookieConsentMessage.__proto__ || Object.getPrototypeOf(CookieConsentMessage)).call(this, props));
 
 		_this.state = {
-			status: false
+			visible: true
 		};
 		return _this;
 	}
 
-	_createClass(ExampleComponent, [{
-		key: "componentDidMount",
+	_createClass(CookieConsentMessage, [{
+		key: 'componentDidMount',
 		value: function componentDidMount() {
-			var _this2 = this;
+			var cookie = (0, _storage.getFromStorage)('cookie-consent');
 
-			var url = this.props.url;
+			if (cookie) {
+				var dismissed = cookie.dismissed;
 
 
-			fetch(url).then(function (res) {
-				return res.json();
-			}).then(function (json) {
-				_this2.setState({
-					status: json.success
-				});
-			});
+				if (dismissed == true) {
+					this.setState({ visible: false });
+				}
+			}
 		}
 	}, {
-		key: "render",
+		key: 'handleDismiss',
+		value: function handleDismiss() {
+			this.setState({ visible: false });
+
+			(0, _storage.setInStorage)('cookie-consent', { dismissed: true, date: Date.now() });
+		}
+	}, {
+		key: 'render',
 		value: function render() {
-			var status = this.state.status;
+			var visible = this.state.visible;
 
 
 			return _react2.default.createElement(
-				"span",
-				{ className: "ExampleComponent" },
-				"Database connection:",
-				status ? _react2.default.createElement(
-					"span",
-					{ className: "success" },
-					"Successful"
-				) : _react2.default.createElement(
-					"span",
-					{ className: "error" },
-					"failed"
+				_semanticUiReact.Message,
+				{ hidden: visible ? false : true, className: 'CookieConsentMessage' },
+				'We use cookies to ensure you the best experience. By using our website you agree to our Cookie Policy.',
+				_react2.default.createElement(
+					_semanticUiReact.Button,
+					{ floated: 'right', basic: true, onClick: this.handleDismiss.bind(this), color: 'black' },
+					'Ok. understood'
 				)
 			);
 		}
 	}]);
 
-	return ExampleComponent;
+	return CookieConsentMessage;
 }(_react.Component);
 
-exports.default = ExampleComponent;
+exports.default = CookieConsentMessage;
 });
 
-;require.register("components/ExampleComponent/index.js", function(exports, require, module) {
+;require.register("components/CookieConsentMessage/index.js", function(exports, require, module) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ExampleComponent = undefined;
+exports.CookieConsentMessage = undefined;
 
-var _ExampleComponent = require('./ExampleComponent');
+var _CookieConsentMessage = require('./CookieConsentMessage');
 
-var _ExampleComponent2 = _interopRequireDefault(_ExampleComponent);
+var _CookieConsentMessage2 = _interopRequireDefault(_CookieConsentMessage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = { ExampleComponent: _ExampleComponent2.default };
-exports.ExampleComponent = _ExampleComponent2.default;
+exports.default = { CookieConsentMessage: _CookieConsentMessage2.default };
+exports.CookieConsentMessage = _CookieConsentMessage2.default;
+});
+
+require.register("components/PageHeader/PageHeader.js", function(exports, require, module) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _reactRouterDom = require('react-router-dom');
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _semanticUiReact = require('semantic-ui-react');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PageHeader = function (_Component) {
+	_inherits(PageHeader, _Component);
+
+	function PageHeader(props) {
+		_classCallCheck(this, PageHeader);
+
+		var _this = _possibleConstructorReturn(this, (PageHeader.__proto__ || Object.getPrototypeOf(PageHeader)).call(this, props));
+
+		_this.state = {};
+		return _this;
+	}
+
+	_createClass(PageHeader, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					_semanticUiReact.Segment,
+					{ inverted: true, style: { borderRadius: 0 } },
+					_react2.default.createElement(
+						_semanticUiReact.Container,
+						{ fluid: true },
+						_react2.default.createElement(
+							_semanticUiReact.Menu,
+							{ stackable: true, inverted: true, secondary: true },
+							_react2.default.createElement(
+								_semanticUiReact.Menu.Item,
+								null,
+								_react2.default.createElement(_semanticUiReact.Image, { src: '/homepage/images/shipyard_logo_icon.png', size: 'mini' })
+							),
+							_react2.default.createElement(
+								_semanticUiReact.Menu.Menu,
+								{ position: 'right' },
+								_react2.default.createElement(
+									_semanticUiReact.Menu.Item,
+									{ name: 'sign-in' },
+									_react2.default.createElement(
+										_semanticUiReact.Button,
+										{
+											color: 'green',
+											onClick: function onClick() {
+												window.location.replace('http://localhost:8080/auth/login');
+												return null;
+											}
+										},
+										'Log-in'
+									)
+								),
+								_react2.default.createElement(
+									_semanticUiReact.Menu.Item,
+									null,
+									_react2.default.createElement(_semanticUiReact.Icon, {
+										name: 'github',
+										size: 'large',
+										onClick: function onClick() {
+											window.location.replace('https://github.com/ShipyardSuite');
+											return null;
+										}
+									})
+								)
+							)
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return PageHeader;
+}(_react.Component);
+
+exports.default = PageHeader;
+});
+
+;require.register("components/PageHeader/index.js", function(exports, require, module) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.PageHeader = undefined;
+
+var _PageHeader = require('./PageHeader');
+
+var _PageHeader2 = _interopRequireDefault(_PageHeader);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = { PageHeader: _PageHeader2.default };
+exports.PageHeader = _PageHeader2.default;
+});
+
+require.register("components/PageLayout/PageLayout.js", function(exports, require, module) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _semanticUiReact = require('semantic-ui-react');
+
+var _ = require('../');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PageLayout = function (_Component) {
+	_inherits(PageLayout, _Component);
+
+	function PageLayout(props) {
+		_classCallCheck(this, PageLayout);
+
+		var _this = _possibleConstructorReturn(this, (PageLayout.__proto__ || Object.getPrototypeOf(PageLayout)).call(this, props));
+
+		_this.state = {};
+		return _this;
+	}
+
+	_createClass(PageLayout, [{
+		key: 'render',
+		value: function render() {
+			var visible = this.state.visible;
+
+
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(_.PageHeader, null),
+				_react2.default.createElement(
+					_semanticUiReact.Container,
+					{ fluid: true },
+					this.props.children
+				),
+				_react2.default.createElement(
+					'div',
+					null,
+					'footer'
+				)
+			);
+		}
+	}]);
+
+	return PageLayout;
+}(_react.Component);
+
+exports.default = PageLayout;
+});
+
+;require.register("components/PageLayout/index.js", function(exports, require, module) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.PageLayout = undefined;
+
+var _PageLayout = require('./PageLayout');
+
+var _PageLayout2 = _interopRequireDefault(_PageLayout);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = { PageLayout: _PageLayout2.default };
+exports.PageLayout = _PageLayout2.default;
 });
 
 require.register("components/index.js", function(exports, require, module) {
@@ -300,12 +512,18 @@ require.register("components/index.js", function(exports, require, module) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ExampleComponent = undefined;
+exports.PageHeader = exports.PageLayout = exports.CookieConsentMessage = undefined;
 
-var _ExampleComponent = require('./ExampleComponent');
+var _CookieConsentMessage = require('./CookieConsentMessage');
 
-exports.default = { ExampleComponent: _ExampleComponent.ExampleComponent };
-exports.ExampleComponent = _ExampleComponent.ExampleComponent;
+var _PageLayout = require('./PageLayout');
+
+var _PageHeader = require('./PageHeader');
+
+exports.default = { CookieConsentMessage: _CookieConsentMessage.CookieConsentMessage, PageLayout: _PageLayout.PageLayout, PageHeader: _PageHeader.PageHeader };
+exports.CookieConsentMessage = _CookieConsentMessage.CookieConsentMessage;
+exports.PageLayout = _PageLayout.PageLayout;
+exports.PageHeader = _PageHeader.PageHeader;
 });
 
 require.register("containers/Home/Home.js", function(exports, require, module) {
@@ -320,6 +538,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _components = require('../../components/');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -345,9 +565,9 @@ var Home = function (_Component) {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
-				'div',
+				_components.PageLayout,
 				null,
-				'Homepage...'
+				'Homepage'
 			);
 		}
 	}]);
@@ -358,7 +578,7 @@ var Home = function (_Component) {
 exports.default = Home;
 });
 
-require.register("containers/Home/index.js", function(exports, require, module) {
+;require.register("containers/Home/index.js", function(exports, require, module) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -376,89 +596,18 @@ exports.default = { Home: _Home2.default };
 exports.Home = _Home2.default;
 });
 
-require.register("containers/NotFound/NotFound.js", function(exports, require, module) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var NotFound = function (_Component) {
-	_inherits(NotFound, _Component);
-
-	function NotFound(props) {
-		_classCallCheck(this, NotFound);
-
-		var _this = _possibleConstructorReturn(this, (NotFound.__proto__ || Object.getPrototypeOf(NotFound)).call(this, props));
-
-		_this.state = {};
-		return _this;
-	}
-
-	_createClass(NotFound, [{
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement(
-				'p',
-				null,
-				'Page not found...'
-			);
-		}
-	}]);
-
-	return NotFound;
-}(_react.Component);
-
-exports.default = NotFound;
-});
-
-require.register("containers/NotFound/index.js", function(exports, require, module) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.NotFound = undefined;
-
-var _NotFound = require('./NotFound');
-
-var _NotFound2 = _interopRequireDefault(_NotFound);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = { NotFound: _NotFound2.default };
-exports.NotFound = _NotFound2.default;
-});
-
 require.register("containers/index.js", function(exports, require, module) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.NotFound = exports.Home = undefined;
+exports.Home = undefined;
 
 var _Home = require('./Home');
 
-var _NotFound = require('./NotFound');
-
-exports.default = { Home: _Home.Home, NotFound: _NotFound.NotFound };
+exports.default = { Home: _Home.Home };
 exports.Home = _Home.Home;
-exports.NotFound = _NotFound.NotFound;
 });
 
 require.register("initialize.js", function(exports, require, module) {
@@ -503,6 +652,46 @@ _reactDom2.default.render(_react2.default.createElement(
 ), document.querySelector('#root'));
 });
 
+require.register("utils/storage.js", function(exports, require, module) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.getFromStorage = getFromStorage;
+exports.setInStorage = setInStorage;
+function getFromStorage(key) {
+	if (!key) {
+		return null;
+	}
+
+	try {
+		var valueStr = localStorage.getItem(key);
+
+		if (valueStr) {
+			return JSON.parse(valueStr);
+		}
+
+		return null;
+	} catch (err) {
+		return null;
+	}
+}
+
+function setInStorage(key, obj) {
+	if (!key) {
+		console.error('Error: Key is missing');
+	}
+
+	try {
+		localStorage.setItem(key, JSON.stringify(obj));
+	} catch (err) {
+		console.error(err);
+	}
+}
+});
+
+;require.alias("node-browser-modules/node_modules/buffer/index.js", "buffer");
 require.alias("process/browser.js", "process");process = require('process');require.register("___globals___", function(exports, require, module) {
   
 });})();require('___globals___');
