@@ -20,6 +20,7 @@ export default class PageLayout extends Component {
 			<div>
 				<PageHeader />
 				<Container fluid>{this.props.children}</Container>
+
 				<div>footer</div>
 			</div>
 		);
