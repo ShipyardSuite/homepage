@@ -14,7 +14,6 @@
 	"author": "Shipyard Suite <shipyardsuite@gmail.com>",
 	"license": "MIT",
 	"dependencies": {
-		"@shipyardsuite/base-layout": "^0.2.22",
 		"@shipyardsuite/logger": "^0.1.9",
 		"@types/chai": "^4.2.11",
 		"bcrypt": "^4.0.1",

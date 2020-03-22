@@ -50,7 +50,7 @@ services:
             - gateway
 
     connection:
-        image: shipyardsuite/connection:develop
+        build: shipyardsuite/connection:develop
         container_name: connection
         ports:
             - "3069:3069"

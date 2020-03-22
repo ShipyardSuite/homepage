@@ -116,12 +116,7 @@
 })();
 
 (function() {
-var global = typeof window === 'undefined' ? this : window;require.register("net", function(exports, require, module) {
-  module.exports = {};
-});
-require.register("fs", function(exports, require, module) {
-  module.exports = {};
-});
+var global = typeof window === 'undefined' ? this : window;
 var process;
 var __makeRelativeRequire = function(require, mappings, pref) {
   var none = {};
@@ -167,6 +162,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _components = require('./components/');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -190,7 +187,8 @@ var App = function (_Component) {
 			return _react2.default.createElement(
 				'div',
 				null,
-				this.props.children
+				this.props.children,
+				_react2.default.createElement(_components.CookieConsentMessage, null)
 			);
 		}
 	}]);
@@ -199,6 +197,109 @@ var App = function (_Component) {
 }(_react.Component);
 
 exports.default = App;
+});
+
+require.register("components/CookieConsentMessage/CookieConsentMessage.js", function(exports, require, module) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _semanticUiReact = require('semantic-ui-react');
+
+var _storage = require('./../../utils/storage');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CookieConsentMessage = function (_Component) {
+	_inherits(CookieConsentMessage, _Component);
+
+	function CookieConsentMessage(props) {
+		_classCallCheck(this, CookieConsentMessage);
+
+		var _this = _possibleConstructorReturn(this, (CookieConsentMessage.__proto__ || Object.getPrototypeOf(CookieConsentMessage)).call(this, props));
+
+		_this.state = {
+			visible: true
+		};
+		return _this;
+	}
+
+	_createClass(CookieConsentMessage, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var cookie = (0, _storage.getFromStorage)('cookie-consent');
+
+			if (cookie) {
+				var dismissed = cookie.dismissed;
+
+
+				if (dismissed == true) {
+					this.setState({ visible: false });
+				}
+			}
+		}
+	}, {
+		key: 'handleDismiss',
+		value: function handleDismiss() {
+			this.setState({ visible: false });
+
+			(0, _storage.setInStorage)('cookie-consent', { dismissed: true, date: Date.now() });
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var visible = this.state.visible;
+
+
+			return _react2.default.createElement(
+				_semanticUiReact.Message,
+				{ hidden: visible ? false : true, className: 'CookieConsentMessage' },
+				'We use cookies to ensure you the best experience. By using our website you agree to our Cookie Policy.',
+				_react2.default.createElement(
+					_semanticUiReact.Button,
+					{ floated: 'right', basic: true, onClick: this.handleDismiss.bind(this), color: 'black' },
+					'Ok. understood'
+				)
+			);
+		}
+	}]);
+
+	return CookieConsentMessage;
+}(_react.Component);
+
+exports.default = CookieConsentMessage;
+});
+
+;require.register("components/CookieConsentMessage/index.js", function(exports, require, module) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.CookieConsentMessage = undefined;
+
+var _CookieConsentMessage = require('./CookieConsentMessage');
+
+var _CookieConsentMessage2 = _interopRequireDefault(_CookieConsentMessage);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = { CookieConsentMessage: _CookieConsentMessage2.default };
+exports.CookieConsentMessage = _CookieConsentMessage2.default;
 });
 
 require.register("components/PageHeader/PageHeader.js", function(exports, require, module) {
@@ -411,13 +512,16 @@ require.register("components/index.js", function(exports, require, module) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PageHeader = exports.PageLayout = undefined;
+exports.PageHeader = exports.PageLayout = exports.CookieConsentMessage = undefined;
+
+var _CookieConsentMessage = require('./CookieConsentMessage');
 
 var _PageLayout = require('./PageLayout');
 
 var _PageHeader = require('./PageHeader');
 
-exports.default = { PageLayout: _PageLayout.PageLayout, PageHeader: _PageHeader.PageHeader };
+exports.default = { CookieConsentMessage: _CookieConsentMessage.CookieConsentMessage, PageLayout: _PageLayout.PageLayout, PageHeader: _PageHeader.PageHeader };
+exports.CookieConsentMessage = _CookieConsentMessage.CookieConsentMessage;
 exports.PageLayout = _PageLayout.PageLayout;
 exports.PageHeader = _PageHeader.PageHeader;
 });
@@ -588,19 +692,7 @@ function setInStorage(key, obj) {
 });
 
 ;require.alias("node-browser-modules/node_modules/buffer/index.js", "buffer");
-require.alias("crypto-browserify/index.js", "crypto");
-require.alias("events/events.js", "events");
-require.alias("stream-http/index.js", "http");
-require.alias("os-browserify/browser.js", "os");
-require.alias("path-browserify/index.js", "path");
-require.alias("process/browser.js", "process");
-require.alias("node-browser-modules/node_modules/punycode/punycode.js", "punycode");
-require.alias("querystring-es3/index.js", "querystring");
-require.alias("stream-browserify/index.js", "stream");
-require.alias("node-browser-modules/node_modules/string_decoder/index.js", "string_decoder");
-require.alias("util/util.js", "sys");
-require.alias("node-browser-modules/node_modules/url/url.js", "url");
-require.alias("vm-browserify/index.js", "vm");process = require('process');require.register("___globals___", function(exports, require, module) {
+require.alias("process/browser.js", "process");process = require('process');require.register("___globals___", function(exports, require, module) {
   
 });})();require('___globals___');
 
