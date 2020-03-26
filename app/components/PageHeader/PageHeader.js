@@ -29,15 +29,15 @@ export default class PageHeader extends Component {
 
 							<Menu.Menu position="right">
 								<Menu.Item name="sign-in">
-									<Button
-										color="green"
-										onClick={() => {
-											window.location.replace(`http://${window.location.host}/auth/login`);
-											return null;
-										}}
-									>
-										Log-in
-									</Button>
+									<a href={`http://${window.location.host}/auth/login`}>
+										<Button color="green">
+											{/* // onClick={() => {
+										// 	window.location.replace(`http://${window.location.host}/auth/login`);
+										// 	return null;
+										// }} */}
+											Log-in
+										</Button>
+									</a>
 								</Menu.Item>
 
 								<Menu.Item>
