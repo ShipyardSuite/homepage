@@ -1,24 +1,6 @@
 version: '2'
 services:
 
-    gateway:
-        build: 
-            context: ./gateway
-            dockerfile: Dockerfile
-        container_name: gateway
-        ports:
-            - "8080:8080"
-            - "8443:8443"
-            - "9876:9876"
-        volumes:
-            - ./gateway/system.config.yml:/usr/src/app/config/system.config.yml
-            - ./gateway/gateway.config.yml:/usr/src/app/config/gateway.config.yml
-        depends_on:
-            - notfound
-            - homepage
-        networks:
-            - gateway
-
     redis:
         image: redis
         container_name: redis
@@ -37,34 +19,26 @@ services:
             - "27017:27017"
         networks:
             - gateway
-    
-    migration:
-        image: shipyardsuite/develop-migration
-        container_name: migration
-        depends_on:
-            - mongo 
-            - auth
-        environment:
-            DATABASE_URL: ${DATABASE_URL}
-        networks:
-            - gateway
 
-    connection:
-        image: shipyardsuite/connection:develop
-        container_name: connection
+    status:
+        image: shipyardsuite/status:develop
+        container_name: status
         ports:
-            - "3069:3069"
+            - "3333:3333"
+        depends_on:
+            - redis
+            - mongo
         environment:
-            DATABASE_URL: ${DATABASE_URL}
-            SERVICE_PORT: 3069
-        networks:
+            SERVICE_NAME: status
+            SERVICE_PORT: 3333
+        networks: 
             - gateway
 
     notfound:
         image: shipyardsuite/notfound:develop
         container_name: notfound
-        expose:
-            - "3003"
+        ports:
+            - "3003:3003"
         environment:
             SERVICE_PORT: 3003
         networks: 
@@ -73,8 +47,8 @@ services:
     dashboard:
         image: shipyardsuite/dashboard:develop
         container_name: dashboard
-        expose:
-            - "3004"
+        ports:
+            - "3004:3004"
         depends_on:
             - redis
             - mongo
@@ -89,8 +63,8 @@ services:
     auth:
         image: shipyardsuite/auth:develop
         container_name: auth
-        expose:
-            - "3002"
+        ports:
+            - "3002:3002"
         depends_on:
             - redis
             - mongo
@@ -105,8 +79,8 @@ services:
     user:
         image: shipyardsuite/user:develop
         container_name: user
-        expose:
-            - "3005"
+        ports:
+            - "3005:3005"
         depends_on:
             - redis
             - mongo
@@ -121,13 +95,13 @@ services:
     homepage:
         build: ./
         container_name: homepage
-        expose:
-            - "${SERVICE_PORT}"
+        ports:
+            - "${SERVICE_PORT}:${SERVICE_PORT}"
         volumes:
             - ./:/usr/src/app
         working_dir: /usr/src/app
         command: sh -c 'npm install; npm run start:dev'
-        depends_on:
+        depends_on: 
             - redis
             - mongo
         networks:

@@ -32,7 +32,7 @@ export default class PageHeader extends Component {
 									<Button
 										color="green"
 										onClick={() => {
-											window.location.replace('http://localhost:8080/auth/login');
+											window.location.replace(`http://${window.location.host}/auth/login`);
 											return null;
 										}}
 									>
