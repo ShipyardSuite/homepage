@@ -260,15 +260,13 @@ var PageHeader = function (_Component) {
 									_semanticUiReact.Menu.Item,
 									{ name: 'sign-in' },
 									_react2.default.createElement(
-										_semanticUiReact.Button,
-										{
-											color: 'green',
-											onClick: function onClick() {
-												window.location.replace('http://' + window.location.host + '/auth/login');
-												return null;
-											}
-										},
-										'Log-in'
+										'a',
+										{ href: 'http://' + window.location.host + '/auth/login' },
+										_react2.default.createElement(
+											_semanticUiReact.Button,
+											{ color: 'green' },
+											'Log-in'
+										)
 									)
 								),
 								_react2.default.createElement(
@@ -531,7 +529,7 @@ _reactDom2.default.render(_react2.default.createElement(
 		_react2.default.createElement(
 			_reactRouterDom.Switch,
 			null,
-			_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/homepage/', component: _containers.Home }),
+			_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _containers.Home }),
 			_react2.default.createElement(_reactRouterDom.Route, {
 				render: function render() {
 					window.location.replace('http://localhost:8080/notfound/');
@@ -582,7 +580,7 @@ function setInStorage(key, obj) {
 }
 });
 
-;require.alias("node-browser-modules/node_modules/buffer/index.js", "buffer");
+;require.alias("buffer/index.js", "buffer");
 require.alias("process/browser.js", "process");process = require('process');require.register("___globals___", function(exports, require, module) {
   
 });})();require('___globals___');

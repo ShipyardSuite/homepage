@@ -4,13 +4,13 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import App from './App';
 
-import { Home } from './containers';
+import Home from './Home';
 
 ReactDOM.render(
 	<Router>
 		<App>
 			<Switch>
-				<Route exact path="/" component={Home} />
+				<Route path="/" component={Home} />
 				<Route
 					render={() => {
 						window.location.replace('http://localhost:8080/notfound/');
