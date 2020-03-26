@@ -116,12 +116,7 @@
 })();
 
 (function() {
-var global = typeof window === 'undefined' ? this : window;require.register("net", function(exports, require, module) {
-  module.exports = {};
-});
-require.register("fs", function(exports, require, module) {
-  module.exports = {};
-});
+var global = typeof window === 'undefined' ? this : window;
 var process;
 var __makeRelativeRequire = function(require, mappings, pref) {
   var none = {};
@@ -269,7 +264,7 @@ var PageHeader = function (_Component) {
 										{
 											color: 'green',
 											onClick: function onClick() {
-												window.location.replace('http://localhost:8080/auth/login');
+												window.location.replace('http://' + window.location.host + '/auth/login');
 												return null;
 											}
 										},
@@ -588,19 +583,7 @@ function setInStorage(key, obj) {
 });
 
 ;require.alias("node-browser-modules/node_modules/buffer/index.js", "buffer");
-require.alias("crypto-browserify/index.js", "crypto");
-require.alias("events/events.js", "events");
-require.alias("stream-http/index.js", "http");
-require.alias("os-browserify/browser.js", "os");
-require.alias("path-browserify/index.js", "path");
-require.alias("process/browser.js", "process");
-require.alias("node-browser-modules/node_modules/punycode/punycode.js", "punycode");
-require.alias("querystring-es3/index.js", "querystring");
-require.alias("stream-browserify/index.js", "stream");
-require.alias("node-browser-modules/node_modules/string_decoder/index.js", "string_decoder");
-require.alias("util/util.js", "sys");
-require.alias("node-browser-modules/node_modules/url/url.js", "url");
-require.alias("vm-browserify/index.js", "vm");process = require('process');require.register("___globals___", function(exports, require, module) {
+require.alias("process/browser.js", "process");process = require('process');require.register("___globals___", function(exports, require, module) {
   
 });})();require('___globals___');
 
