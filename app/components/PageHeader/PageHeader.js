@@ -41,14 +41,14 @@ export default class PageHeader extends Component {
 								</Menu.Item>
 
 								<Menu.Item>
-									<Icon
-										name="github"
-										size="large"
-										onClick={() => {
-											window.location.replace('https://github.com/ShipyardSuite');
-											return null;
-										}}
-									/>
+									<a href="https://github.com/ShipyardSuite">
+										<Icon name="github" />
+										{/* size="large"
+										// onClick={() => {
+										// 	window.location.replace('https://github.com/ShipyardSuite');
+										// 	return null;
+										// }} */}
+									</a>
 								</Menu.Item>
 							</Menu.Menu>
 						</Menu>
