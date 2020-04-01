@@ -17,10 +17,10 @@ export default class App extends React.Component {
 		return (
 			<ul>
 				<li>
-					link to <a href={`http://${window.location.host}/auth/login`}>Login Page</a>
+					<a href={`http://${window.location.host}/auth/login`}>Login Page</a>
 				</li>
 				<li>
-					link to <a href={`http://${window.location.host}/auth/login`}>Registration Page</a>
+					<a href={`http://${window.location.host}/auth/register`}>Registration Page</a>
 				</li>
 			</ul>
 		);
