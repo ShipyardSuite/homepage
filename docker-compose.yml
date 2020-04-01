@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+    # redis:
+    #     image: redis
+    #     container_name: redis
+    #     ports:
+    #         - "6379:6379"
+    #     networks:
+    #         - gateway
+
+    # mongo:
+    #     image: mongo:3
+    #     container_name: mongo
+    #     command: mongod --smallfiles --bind_ip_all
+    #     volumes:
+    #         - ./data:/data/db
+    #     ports:
+    #         - "27017:27017"
+    #     networks:
+    #         - gateway
+
+    homepage:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        volumes:
+            - ./:/usr/src/app
+        working_dir: /usr/src/app
+        command: sh -c 'npm install; npm run start:dev'
+        container_name: homepage
+        ports:
+            - "3001:3001"
+        networks:
+            - gateway
+        environment:
+            SERVICE_PORT: 3001
+            SERVICE_NAME: homepage
+
+networks:
+    gateway:
