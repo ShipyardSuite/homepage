@@ -17,6 +17,9 @@ export default class App extends React.Component {
 		return (
 			<ul>
 				<li>
+					<a href={`http://${window.location.host}/documentation/`}>Documentation</a>
+				</li>
+				<li>
 					<a href={`http://${window.location.host}/auth/login`}>Login Page</a>
 				</li>
 				<li>
