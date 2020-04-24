@@ -61,6 +61,18 @@ services:
         environment:
             SERVICE_NAME: auth
             SERVICE_PORT: 3002
+    
+    documentation:
+        image: shipyardsuite/documentation:develop
+        command: sh -c 'npm run start:dev'
+        container_name: documentation
+        ports:
+            - "3003:3003"
+        networks:
+            - gateway
+        environment:
+            SERVICE_NAME: documentation
+            SERVICE_PORT: 3003
 
     dashboard:
         image: shipyardsuite/dashboard:develop
