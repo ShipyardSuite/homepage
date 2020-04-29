@@ -3,6 +3,7 @@
 ![GitHub issues](https://img.shields.io/github/issues/shipyardsuite/homepage?color=3cafe2&style=flat-square)
 ![Maintenance](https://img.shields.io/maintenance/yes/2020?color=3cafe2&style=flat-square)
 ![GitHub](https://img.shields.io/github/license/shipyardsuite/homepage?color=3cafe2&style=flat-square)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/shipyardsuite/homepage?color=3cafe2&style=flat-square)
 
 # homepage
 
