@@ -37,7 +37,6 @@ class App {
 	 */
 	config() {
 		this.app.use(`/${this.serviceName}/public`, require('express').static(require('path').join('public')));
-		// this.app.use('/uploads', require('express').static(require('path').join('uploads')));
 		this.app.use(require('express').urlencoded({ extended: true }));
 		this.app.use(require('express').json());
 	}
