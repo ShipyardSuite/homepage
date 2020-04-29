@@ -19,7 +19,8 @@ export default class App extends React.Component {
 		return (
 			<Container fluid>
 				<PageHeader />
-				PAGECONTENT FOOTER
+				<p>PAGECONTENT</p>
+				<p>FOOTER</p>
 			</Container>
 		);
 	}
