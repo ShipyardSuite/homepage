@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "server/index.js",
 	"scripts": {
-		"start:dev": "concurrently \"brunch watch\" \"nodemon -L --verbose server/index.js\"",
+		"start:dev": "concurrently \"brunch watch\" \"nodemon -L server/index.js\"",
 		"build": "npm run docs && brunch build",
 		"start": "node server/index.js",
 		"docs": "jsdoc -r ./server/*.js -d ./docs",
