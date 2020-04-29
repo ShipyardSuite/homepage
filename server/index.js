@@ -3,6 +3,8 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const winston = require('winston');
+const Redis = require('winston-redis');
 
 /**
  * Main application class.
@@ -14,6 +16,7 @@ class App {
 		this.app = express();
 		this.serviceName = process.env.SERVICE_NAME || 'default';
 		this.servicePort = process.env.SERVICE_PORT || 3000;
+		this.logger;
 	}
 
 	/**
@@ -21,6 +24,7 @@ class App {
 	 * @method init
 	 */
 	init() {
+		this.configLogger();
 		this.config();
 		this.apiRoutes();
 		this.reactRoutes();
@@ -39,13 +43,46 @@ class App {
 	}
 
 	/**
+	 * Configure Redis-Logger.
+	 * @method configLogger
+	 */
+	configLogger() {
+		/**
+		 * @todo Add Logger to all services
+		 * @body Currently the Logger only works in the connection service, this configuration should be copied to all nodejs based service.
+		 */
+		this.logger = winston.createLogger({
+			format: winston.format.timestamp(),
+			defaultMeta: { service: process.env.SERVICE_NAME },
+			transports: [
+				new winston.transports.Console({
+					format: winston.format.combine(
+						winston.format.timestamp({ format: 'YYYY-MM-DD hh:mm:ss a' }),
+						winston.format.colorize(),
+						winston.format.simple(),
+						winston.format.printf(
+							(info) => `${info.timestamp} | ${info.level} | ${info.service} | ${info.message}`
+						)
+					)
+				}),
+				new Redis({
+					host: 'redis',
+					port: 6379,
+					container: 'logs',
+					expire: 7 * 24 * 60 * 60
+				})
+			]
+		});
+	}
+
+	/**
 	 * Read API routes from /api/directory, if more than 1 route exists.
 	 * @method apiRoutes
 	 */
 	apiRoutes() {
 		fs.readdirSync(__dirname + '/api/').forEach((file, i, allRoutes) => {
 			if (allRoutes.length > 0) {
-				require(`./api/${file.substr(0, file.indexOf('.'))}`)(this.app, this.serviceName);
+				require(`./api/${file.substr(0, file.indexOf('.'))}`)(this.app, this.logger, this.serviceName);
 			}
 		});
 	}
@@ -69,10 +106,7 @@ class App {
 	 */
 	start() {
 		this.app.listen(this.servicePort, () => {
-			console.log(
-				`Service ${this.serviceName} listening on port ${this.servicePort} - http://localhost:${this
-					.servicePort}/${this.serviceName}/`
-			);
+			this.logger.info(`Service "${this.serviceName}" listening on port ${this.servicePort}`);
 		});
 	}
 }
