@@ -21,6 +21,19 @@ services:
         networks:
             - gateway
 
+    gateway:
+        image: shipyardsuite/gateway:develop
+        container_name: gateway
+        ports:
+            - "8080:8080"
+            - "8443:8443"
+            - "9876:9876"
+        volumes:
+            - ./gateway/config/system.config.yml:/usr/src/app/config/system.config.yml
+            - ./gateway/config/gateway.config.yml:/usr/src/app/config/gateway.config.yml
+        networks:
+            - gateway
+
     connection:
         image: shipyardsuite/connection:develop
         command: sh -c 'npm run build && npm run start'

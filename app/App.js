@@ -19,7 +19,7 @@ export default class App extends React.Component {
 		return (
 			<Container fluid>
 				<PageHeader />
-				<p>PAGECONTENT</p>
+				{this.props.children}
 				<p>FOOTER</p>
 			</Container>
 		);

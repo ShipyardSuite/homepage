@@ -91,7 +91,7 @@ class App {
 	 * @method reactRoutes
 	 */
 	reactRoutes() {
-		this.app.get(`/`, (req, res) => {
+		this.app.get(`/*`, (req, res) => {
 			const content = fs.readFileSync(path.resolve(__dirname, './../public/index.html')).toString();
 			res.set('content-type', 'text/html');
 			res.send(content);
