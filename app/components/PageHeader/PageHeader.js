@@ -30,7 +30,7 @@ export default class PageHeader extends React.Component {
 						 * @todo Add final links for feature list and blog
 						 * @body Either create services for each header section, or repair the react-router setup for this service.
 						 */}
-						<Menu.Item href={`#`}>FEATURES</Menu.Item>
+						<Menu.Item href={"#"}>FEATURES</Menu.Item>
 						<Menu.Item href={`http://${window.location.host}/status/`}>STATUS</Menu.Item>
 						<Menu.Item href={`http://${window.location.host}/documentation/`}>DOCUMENTATION</Menu.Item>
 						<Menu.Item href={`http://${window.location.host}/blog`}>BLOG</Menu.Item>

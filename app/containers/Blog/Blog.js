@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import { Menu, Button } from 'semantic-ui-react';
+import { Menu, Button } from "semantic-ui-react";
 
 /**
  * Default class for react Application

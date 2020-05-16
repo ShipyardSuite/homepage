@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					<Route exact path="*/blog" component={Blog} />
 				</Switch>
 			</App>
-		</Router>, document.querySelector('#app'));
+		</Router>, document.querySelector("#app"));
 });
 
 //<Route exact path="*/" component={Home} />
