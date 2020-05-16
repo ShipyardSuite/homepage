@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import React from "react";
 import App from "App";
 
-import { Home, Blog } from './containers';
+import { Home, Blog } from "./containers";
 
 document.addEventListener('DOMContentLoaded', () => {
 	ReactDOM.render(
@@ -19,5 +19,3 @@ document.addEventListener('DOMContentLoaded', () => {
 		</Router>, document.querySelector("#app"));
 });
 
-//<Route exact path="*/" component={Home} />
-//<Route exact path="*/blog/" component={Blog} />
