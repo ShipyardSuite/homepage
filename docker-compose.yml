@@ -21,9 +21,22 @@ services:
         networks:
             - gateway
 
+    gateway:
+        image: shipyardsuite/gateway:develop
+        container_name: gateway
+        ports:
+            - "8080:8080"
+            - "8443:8443"
+            - "9876:9876"
+        volumes:
+            - ./gateway/config/system.config.yml:/usr/src/app/config/system.config.yml
+            - ./gateway/config/gateway.config.yml:/usr/src/app/config/gateway.config.yml
+        networks:
+            - gateway
+
     connection:
         image: shipyardsuite/connection:develop
-        command: sh -c 'npm run start:dev'
+        command: sh -c 'npm run build && npm run start'
         container_name: connection
         ports:
             - "3069:3069"
@@ -52,7 +65,7 @@ services:
 
     auth:
         image: shipyardsuite/auth:develop
-        command: sh -c 'npm run start:dev'
+        command: sh -c 'npm run build && npm run start'
         container_name: auth
         ports:
             - "3002:3002"
@@ -64,7 +77,7 @@ services:
     
     documentation:
         image: shipyardsuite/documentation:develop
-        command: sh -c 'npm run start:dev'
+        command: sh -c 'npm run build && npm run start'
         container_name: documentation
         ports:
             - "3003:3003"
@@ -76,7 +89,7 @@ services:
 
     dashboard:
         image: shipyardsuite/dashboard:develop
-        command: sh -c 'npm run start:dev'
+        command: sh -c 'npm run build && npm run start'
         container_name: dashboard
         ports:
             - "3004:3004"
@@ -88,7 +101,7 @@ services:
 
     player:
         image: shipyardsuite/player:develop
-        command: sh -c 'npm run start:dev'
+        command: sh -c 'npm run build && npm run start'
         container_name: player
         ports:
             - "3006:3006"
@@ -100,7 +113,7 @@ services:
 
     project:
         image: shipyardsuite/project:develop
-        command: sh -c 'npm run start:dev'
+        command: sh -c 'npm run build && npm run start'
         container_name: project
         ports:
             - "3007:3007"
@@ -112,7 +125,7 @@ services:
 
     status:
         image: shipyardsuite/status:develop
-        command: sh -c 'npm run start:dev'
+        command: sh -c 'npm run build && npm run start'
         container_name: status
         ports:
             - "3008:3008"
@@ -124,7 +137,7 @@ services:
 
     user:
         image: shipyardsuite/user:develop
-        command: sh -c 'npm run start:dev'
+        command: sh -c 'npm run build && npm run start'
         container_name: user
         ports:
             - "3009:3009"

@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
-import { Menu, Container } from 'semantic-ui-react';
-import { PageHeader } from './components';
+import { Menu, Container } from "semantic-ui-react";
+import { PageHeader } from "./components";
 /**
  * Default class for react Application
  * @class App
  */
 export default class App extends React.Component {
 	componentDidMount() {
-		document.title = 'Page Title';
+		document.title = "Page Title";
 	}
 
 	/**
@@ -19,7 +19,7 @@ export default class App extends React.Component {
 		return (
 			<Container fluid>
 				<PageHeader />
-				<p>PAGECONTENT</p>
+				{this.props.children}
 				<p>FOOTER</p>
 			</Container>
 		);
