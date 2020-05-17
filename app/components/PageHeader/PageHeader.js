@@ -20,7 +20,7 @@ export default class PageHeader extends React.Component {
 	   */
 	render() {
 		return (
-			<Segment inverted style={{ borderRadius: 0 }}>
+			<Segment className="Header" inverted style={{ borderRadius: 0 }}>
 				<Container fluid>
 					<Menu stackable inverted secondary>
 						<Menu.Item>

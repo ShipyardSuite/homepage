@@ -1,4 +1,5 @@
 import { PageHeader } from "./PageHeader";
+import { PageFooter } from "./PageFooter";
 
-export default { PageHeader };
-export { PageHeader };
+export default { PageHeader, PageFooter };
+export { PageHeader, PageFooter };

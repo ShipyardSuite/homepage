@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Menu, Container } from "semantic-ui-react";
-import { PageHeader } from "./components";
+import { PageHeader, PageFooter } from "./components";
 /**
  * Default class for react Application
  * @class App
@@ -17,11 +17,25 @@ export default class App extends React.Component {
 	 */
 	render() {
 		return (
-			<Container fluid>
-				<PageHeader />
-				{this.props.children}
-				<p>FOOTER</p>
-			</Container>
+			// <div>
+			// 	<Container fluid>
+			// 		<PageHeader />
+			// 		<div className="Content">{this.props.children}</div>
+
+			// 	</Container>
+			// 	<PageFooter />
+			// </div>
+			<div>
+				<div className="content">
+					<Container fluid>
+						<PageHeader />
+						<Container>
+							{this.props.children}
+						</Container>
+					</Container>
+				</div>
+				<PageFooter />
+			</div>
 		);
 	}
 }
