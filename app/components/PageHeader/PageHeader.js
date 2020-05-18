@@ -20,7 +20,7 @@ export default class PageHeader extends React.Component {
 	   */
 	render() {
 		return (
-			<Segment className="Header" inverted style={{ borderRadius: 0 }}>
+			<Segment className="Header" inverted style={{ borderRadius: 0, background: "inherit" }}>
 				<Container fluid>
 					<Menu stackable inverted secondary>
 						<Menu.Item>
@@ -31,9 +31,9 @@ export default class PageHeader extends React.Component {
 						 * @body Either create services for each header section, or repair the react-router setup for this service.
 						 */}
 						<Menu.Item href={"#"}>FEATURES</Menu.Item>
-						<Menu.Item href={`http://${window.location.host}/status/`}>STATUS</Menu.Item>
 						<Menu.Item href={`http://${window.location.host}/documentation/`}>DOCUMENTATION</Menu.Item>
 						<Menu.Item href={`http://${window.location.host}/blog`}>BLOG</Menu.Item>
+						<Menu.Item href={`http://${window.location.host}/status/`}>STATUS</Menu.Item>
 
 						<Menu.Menu position="right">
 

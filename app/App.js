@@ -1,15 +1,37 @@
 import React from "react";
 
-import { Menu, Container } from "semantic-ui-react";
+import { Menu, Container, Segment } from "semantic-ui-react";
 import { PageHeader, PageFooter } from "./components";
 /**
  * Default class for react Application
  * @class App
  */
 export default class App extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			offset: 0
+		};
+	}
+
 	componentDidMount() {
 		document.title = "Page Title";
 	}
+
+	componentDidMount() {
+		window.addEventListener('scroll', this.parallaxShift.bind(this));
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('scroll', this.parallaxShift.bind(this));
+	}
+
+	parallaxShift() {
+		this.setState({
+			offset: window.pageYOffset / 2
+		});
+	};
 
 	/**
 	 * Renders the current react component.
@@ -17,25 +39,56 @@ export default class App extends React.Component {
 	 */
 	render() {
 		return (
-			// <div>
+			<div>
+				<header
+					className='header-background'
+					style={{ backgroundPositionY: this.state.offset, height: "100vh" }}
+				>
+					<PageHeader />
+					<section
+						className='info-container'
+						style={{ bottom: this.state.offset / 2 }}
+					>
+						<Container>
+							<Segment>Test</Segment>
+						</Container>
+					</section>
+				</header>
+				<Segment style={{ marginTop: 0 }} basic inverted>
+					<Container>
+						<Segment>Test</Segment>
+					</Container>
+				</Segment>
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+				<PageFooter />
+			</div >
+		);
+	}
+}
+/*
+<div>
+				{/* <div className="content">
+					<Container fluid>
+						<PageHeader />
+						{this.props.children}
+					</Container>
+				</div>
+				<PageFooter /> *
+				</div >
+* /
+// <div>
 			// 	<Container fluid>
 			// 		<PageHeader />
 			// 		<div className="Content">{this.props.children}</div>
 
 			// 	</Container>
 			// 	<PageFooter />
-			// </div>
-			<div>
-				<div className="content">
-					<Container fluid>
-						<PageHeader />
-						<Container>
-							{this.props.children}
-						</Container>
-					</Container>
-				</div>
-				<PageFooter />
-			</div>
-		);
-	}
-}
+			// </div>*/
