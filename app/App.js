@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Menu, Container, Segment } from "semantic-ui-react";
+
 import { PageHeader, PageFooter } from "./components";
 /**
  * Default class for react Application
@@ -59,36 +60,8 @@ export default class App extends React.Component {
 						<Segment>Test</Segment>
 					</Container>
 				</Segment>
-				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 				<PageFooter />
 			</div >
 		);
 	}
 }
-/*
-<div>
-				{/* <div className="content">
-					<Container fluid>
-						<PageHeader />
-						{this.props.children}
-					</Container>
-				</div>
-				<PageFooter /> *
-				</div >
-* /
-// <div>
-			// 	<Container fluid>
-			// 		<PageHeader />
-			// 		<div className="Content">{this.props.children}</div>
-
-			// 	</Container>
-			// 	<PageFooter />
-			// </div>*/

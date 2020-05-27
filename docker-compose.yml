@@ -102,7 +102,7 @@ services:
 
     player:
         image: shipyardsuite/player:develop
-        command: sh -c 'npm run build && npm run start'
+        command: sh -c 'npm run start'
         container_name: player
         ports:
             - "3006:3006"
@@ -114,7 +114,7 @@ services:
 
     project:
         image: shipyardsuite/project:develop
-        command: sh -c 'npm run build && npm run start'
+        command: sh -c 'npm run start'
         container_name: project
         ports:
             - "3007:3007"
@@ -138,7 +138,7 @@ services:
 
     user:
         image: shipyardsuite/user:develop
-        command: sh -c 'npm run build && npm run start'
+        command: sh -c 'npm run start'
         container_name: user
         ports:
             - "3009:3009"
