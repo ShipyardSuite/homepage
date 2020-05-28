@@ -10,7 +10,7 @@ import {
     Loader
 } from "semantic-ui-react";
 
-import { Layout } from "./../../components/"";
+import { Layout } from "./../../components/";
 
 import "./BlogPost.css";
 

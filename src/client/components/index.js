@@ -1,4 +1,4 @@
-import Layout from "./Layout/Layout"
+import Layout from "./Layout/Layout";
 import PageHeader from "./PageHeader/PageHeader";
 import PageFooter from "./PageFooter/PageFooter";
 
