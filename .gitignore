@@ -1,8 +1,8 @@
-/_legacy
-/node_modules
 /data
-/public
+/dist
+/node_modules
 /coverage
+/_legacy
+.nyc_output
 .DS_Store
 .env
-.nyc_output
