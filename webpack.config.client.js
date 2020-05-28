@@ -2,7 +2,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
-const serviceName = process.env.SERVICE_NAME
+const serviceName = process.env.SERVICE_NAME;
 
 module.exports = () => {
     return {
