@@ -1,6 +1,6 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const path = require("path")
+const path = require("path");
 
 const serviceName = process.env.SERVICE_NAME
 
@@ -47,7 +47,7 @@ module.exports = () => {
                         {
                             loader: "sass-loader",
                             options: {
-                                implementation: require('sass'),
+                                implementation: require("sass"),
                             },
                         },
                     ],
