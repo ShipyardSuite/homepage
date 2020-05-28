@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import moment from 'moment';
-import { Menu, Container, Segment, Header, Grid, Card, Icon, Image, Pagination, Loader } from 'semantic-ui-react';
+import moment from "moment";
+import { Menu, Container, Segment, Header, Grid, Card, Icon, Image, Pagination, Loader } from "semantic-ui-react";
 
-import { Layout } from './../../components/';
+import { Layout } from "./../../components/";
 
 export default class Blog extends React.Component {
     constructor(props) {
@@ -19,7 +19,7 @@ export default class Blog extends React.Component {
     componentDidMount() {
         document.title = "ShipyardSuite | Blog";
 
-        fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40sabesan96')
+        fetch("https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40sabesan96")
             .then((res) => res.json())
             .then((json) => {
 
@@ -40,7 +40,7 @@ export default class Blog extends React.Component {
                     {isLoading ?
                         (
                             <Segment basic>
-                                <Loader active inline='centered' />
+                                <Loader active inline="centered" />
                             </Segment>
                         ) :
                         (
@@ -52,7 +52,7 @@ export default class Blog extends React.Component {
                                             <Card.Content>
                                                 <Card.Header>{item.title}</Card.Header>
                                                 <Card.Meta>
-                                                    <span className='date'>
+                                                    <span className="date">
                                                         {moment(item.pubDate).fromNow()}
                                                     </span>
                                                 </Card.Meta>
@@ -63,18 +63,18 @@ export default class Blog extends React.Component {
                                             </Card.Content>
                                             <Card.Content extra>
                                                 <a>
-                                                    <Icon name='user' />
+                                                    <Icon name="user" />
                                                     {item.author}
                                                 </a>
                                                 <p style={{ float: "right" }}>
-                                                    <Icon name='tags' />
+                                                    <Icon name="tags" />
                                                     {item.categories.map((category, i) => {
-                                                        return (<span key={i}> {category}</span>)
+                                                        return (<span key={i}> {category}</span>);
                                                     })}
                                                 </p>
                                             </Card.Content>
                                         </Card>
-                                    )
+                                    );
                                 })}
                             </Card.Group>
                         )}

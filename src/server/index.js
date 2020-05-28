@@ -1,10 +1,8 @@
-import express from 'express';
+import express from "express";
 import winston from "winston";
 import Redis from "winston-redis";
-import fs from 'fs';
-import path from 'path';
-
-import { exampleFunction } from "./utils/example";
+import fs from "fs";
+import path from "path";
 
 import { LoggerConfig, DBConfig } from "./config";
 
@@ -15,7 +13,7 @@ class App {
         this.app = express();
         this.serviceName = process.env.SERVICE_NAME;
         this.servicePort = process.env.SERVICE_PORT;
-        this.database = process.env.DATABASE_URL || 'mongodb://mongo:27017/db';
+        this.database = process.env.DATABASE_URL || "mongodb://mongo:27017/db";
         this.logger = {};
         this.path = { public: path.resolve(`${__dirname}/../client/`) };
     }
@@ -60,9 +58,9 @@ class App {
     }
 
     reactRoutes() {
-        this.app.get('*/', (req, res) => {
+        this.app.get("*/", (req, res) => {
             const content = fs.readFileSync(`${this.path.public}/index.html`).toString();
-            res.set('content-type', 'text/html');
+            res.set("content-type", "text/html");
             res.send(content);
             res.end();
         });

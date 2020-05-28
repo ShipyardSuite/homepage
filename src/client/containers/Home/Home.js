@@ -6,7 +6,7 @@ import {
     Header
 } from "semantic-ui-react";
 
-import { Layout } from './../../components/';
+import { Layout } from "./../../components/";
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -20,18 +20,18 @@ export default class Home extends React.Component {
     componentDidMount() {
         document.title = "ShipyardSuite | Home";
 
-        window.addEventListener('scroll', this.parallaxShift.bind(this));
+        window.addEventListener("scroll", this.parallaxShift.bind(this));
     }
 
     componentWillUnmount() {
-        window.removeEventListener('scroll', this.parallaxShift.bind(this));
+        window.removeEventListener("scroll", this.parallaxShift.bind(this));
     }
 
     parallaxShift() {
         this.setState({
             offset: window.pageYOffset / 2
         });
-    };
+    }
 
     render() {
         return (

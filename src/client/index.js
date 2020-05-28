@@ -1,12 +1,10 @@
-"use strict";
-
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import React from "react";
 
-import { Home, Blog, BlogPost, Features, NotFound } from './containers';
+import { Home, Blog, BlogPost, Features, NotFound } from "./containers";
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     ReactDOM.render(
         <Router>
             <Switch>

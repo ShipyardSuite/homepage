@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import moment from 'moment';
+import moment from "moment";
 import {
     Segment,
     Container,
@@ -10,7 +10,7 @@ import {
     Loader
 } from "semantic-ui-react";
 
-import { Layout } from './../../components/';
+import { Layout } from "./../../components/"";
 
 import "./BlogPost.css";
 
@@ -29,12 +29,12 @@ export default class BlogPost extends React.Component {
 
         document.title = "ShipyardSuite | Blog";
 
-        fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40sabesan96')
+        fetch("https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40sabesan96")
             .then((res) => res.json())
             .then((json) => {
 
                 const post = json.items.filter(function (item) {
-                    return item.guid === `https://medium.com/p/${params.date}`
+                    return item.guid === `https://medium.com/p/${params.date}`;
                 });
                 this.setState({
                     isLoading: false,
@@ -48,7 +48,7 @@ export default class BlogPost extends React.Component {
                             :
                             (
                                 post[0].title
-                            )}`
+                            )}`;
                 });
             });
     }
@@ -63,7 +63,7 @@ export default class BlogPost extends React.Component {
                     {isLoading ?
                         (
                             <Segment basic>
-                                <Loader active inline='centered' />
+                                <Loader active inline="centered" />
                             </Segment>
                         ) :
                         (
@@ -71,7 +71,7 @@ export default class BlogPost extends React.Component {
                                 <Card.Content>
                                     <Card.Header>{post.title}</Card.Header>
                                     <Card.Meta>
-                                        <span className='date'>
+                                        <span className="date">
                                             {moment(post.pubDate).fromNow()}
                                         </span>
                                     </Card.Meta>
@@ -82,14 +82,14 @@ export default class BlogPost extends React.Component {
                                 </Card.Content>
                                 <Card.Content extra>
                                     <a>
-                                        <Icon name='user' />
+                                        <Icon name="user" />
                                         {post.author}
                                     </a>
                                     {post.categories &&
                                         <p style={{ float: "right" }}>
-                                            <Icon name='tags' />
+                                            <Icon name="tags" />
                                             {post.categories.map((category, i) => {
-                                                return (<span key={i}> {category}</span>)
+                                                return (<span key={i}> {category}</span>);
                                             })}
                                         </p>
                                     }

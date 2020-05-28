@@ -9,7 +9,7 @@ import {
     Button,
 } from "semantic-ui-react";
 
-import './PageHeader.sass';
+import "./PageHeader.sass";
 
 export default class PageHeader extends React.Component {
     render() {

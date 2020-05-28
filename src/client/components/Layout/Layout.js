@@ -18,18 +18,18 @@ export default class Layout extends React.Component {
     componentDidMount() {
         document.title = "ShipyardSuite | Home";
 
-        window.addEventListener('scroll', this.parallaxShift.bind(this));
+        window.addEventListener("scroll", this.parallaxShift.bind(this));
     }
 
     componentWillUnmount() {
-        window.removeEventListener('scroll', this.parallaxShift.bind(this));
+        window.removeEventListener("scroll", this.parallaxShift.bind(this));
     }
 
     parallaxShift() {
         this.setState({
             offset: window.pageYOffset / 2
         });
-    };
+    }
 
     render() {
         const { fluid, isHome } = this.props;
@@ -39,7 +39,7 @@ export default class Layout extends React.Component {
                 {
                     isHome ? (
                         <header
-                            className='header-background'
+                            className="header-background"
                             style={{
                                 backgroundPositionY: this.state.offset,
                                 height: "80vh"

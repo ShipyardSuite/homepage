@@ -1,8 +1,6 @@
-"use strict";
-
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const path = require('path')
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const path = require("path")
 
 const serviceName = process.env.SERVICE_NAME
 
@@ -37,17 +35,17 @@ module.exports = () => {
                     test: /\.css$/,
                     exclude: /node_modules/,
                     use: [
-                        { loader: 'style-loader' },
-                        { loader: 'css-loader' }
+                        { loader: "style-loader" },
+                        { loader: "css-loader" }
                     ]
                 },
                 {
                     test: /\.s[ac]ss$/i,
                     use: [
-                        'style-loader',
-                        'css-loader',
+                        "style-loader",
+                        "css-loader",
                         {
-                            loader: 'sass-loader',
+                            loader: "sass-loader",
                             options: {
                                 implementation: require('sass'),
                             },
@@ -72,11 +70,11 @@ module.exports = () => {
             new CopyWebpackPlugin({
                 patterns: [
                     {
-                        from: 'src/client/images',
-                        to: 'images'
+                        from: "src/client/images",
+                        to: "images"
                     },
                 ],
             }),
         ]
-    }
+    };
 };
