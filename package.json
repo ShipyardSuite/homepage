@@ -9,7 +9,8 @@
     "build:client": "webpack --config webpack.config.client.js",
     "build:server": "webpack  --config webpack.config.server.js",
     "start": "NODE_ENV=production node ./dist/server/bundle.js",
-    "test": "nyc --reporter=lcov mocha -- -R spec tests/"
+    "test": "nyc --reporter=lcov mocha -- -R spec tests/",
+    "lint": "eslint src/"
   },
   "license": "MIT",
   "repository": {
@@ -44,12 +45,17 @@
     "chai": "4.2.0",
     "copy-webpack-plugin": "6.0.1",
     "css-loader": "3.5.3",
-    "eslint": "7.1.0",
+    "eslint": "6.8.0",
     "eslint-config-airbnb": "18.1.0",
     "eslint-config-airbnb-base": "14.1.0",
     "eslint-loader": "4.0.2",
     "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-react": "7.20.0",
+    "eslint-plugin-react-hooks": "2.5.1",
     "html-webpack-plugin": "4.3.0",
+    "husky": "4.2.5",
+    "lint-staged": "10.2.7",
     "mocha": "7.1.2",
     "nodemon": "^2.0.2",
     "nyc": "15.0.1",

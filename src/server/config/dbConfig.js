@@ -1,8 +1,10 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-class DBConfig {
-    constructor(db) {
-        mongoose.connect(db, {
+class DBConfig
+{
+    constructor(db)
+    {
+        mongoose.connect(db,{
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useFindAndModify: false
@@ -12,7 +14,8 @@ class DBConfig {
 
     }
 
-    checkConnection() {
+    checkConnection()
+    {
         return mongoose.connection.readyState ? true : false;
     }
 }

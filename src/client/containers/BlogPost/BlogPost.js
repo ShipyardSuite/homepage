@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import moment from "moment";
+import React from 'react';
+import PropTypes from 'prop-types';
+import moment from 'moment';
 import {
     Segment,
     Container,
@@ -8,14 +8,16 @@ import {
     Icon,
     Image,
     Loader
-} from "semantic-ui-react";
+} from 'semantic-ui-react';
 
-import { Layout } from "./../../components/";
+import { Layout } from './../../components/';
 
-import "./BlogPost.css";
+import './BlogPost.css';
 
-export default class BlogPost extends React.Component {
-    constructor(props) {
+export default class BlogPost extends React.Component 
+{
+    constructor(props) 
+    {
         super(props);
 
         this.state = {
@@ -24,22 +26,26 @@ export default class BlogPost extends React.Component {
         };
     }
 
-    componentDidMount() {
+    componentDidMount() 
+    {
         const { match: { params } } = this.props;
 
-        document.title = "ShipyardSuite | Blog";
+        document.title = 'ShipyardSuite | Blog';
 
-        fetch("https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40sabesan96")
+        fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40sabesan96')
             .then((res) => res.json())
-            .then((json) => {
+            .then((json) => 
+            {
 
-                const post = json.items.filter(function (item) {
+                const post = json.items.filter(function (item) 
+                {
                     return item.guid === `https://medium.com/p/${params.date}`;
                 });
                 this.setState({
                     isLoading: false,
                     post: post[0]
-                }, () => {
+                }, () => 
+                {
                     document.title = `ShipyardSuite | Blog: ${
                         post[0].title.length > 25 ?
                             (
@@ -53,7 +59,8 @@ export default class BlogPost extends React.Component {
             });
     }
 
-    render() {
+    render() 
+    {
         const { isLoading, post } = this.state;
 
         return (
@@ -86,9 +93,10 @@ export default class BlogPost extends React.Component {
                                         {post.author}
                                     </a>
                                     {post.categories &&
-                                        <p style={{ float: "right" }}>
+                                        <p style={{ float: 'right' }}>
                                             <Icon name="tags" />
-                                            {post.categories.map((category, i) => {
+                                            {post.categories.map((category, i) => 
+                                            {
                                                 return (<span key={i}> {category}</span>);
                                             })}
                                         </p>
@@ -102,3 +110,8 @@ export default class BlogPost extends React.Component {
         );
     }
 }
+
+BlogPost.propTypes = {
+    match: PropTypes.object
+};
+

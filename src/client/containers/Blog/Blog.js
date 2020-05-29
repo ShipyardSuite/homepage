@@ -1,12 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import moment from "moment";
-import { Menu, Container, Segment, Header, Grid, Card, Icon, Image, Pagination, Loader } from "semantic-ui-react";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+import { Container, Segment, Card, Icon, Image, Loader } from 'semantic-ui-react';
 
-import { Layout } from "./../../components/";
+import { Layout } from './../../components/';
 
-export default class Blog extends React.Component {
-    constructor(props) {
+export default class Blog extends React.Component 
+{
+    constructor(props) 
+    {
         super(props);
 
         this.state = {
@@ -16,12 +18,14 @@ export default class Blog extends React.Component {
         };
     }
 
-    componentDidMount() {
-        document.title = "ShipyardSuite | Blog";
+    componentDidMount() 
+    {
+        document.title = 'ShipyardSuite | Blog';
 
-        fetch("https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40sabesan96")
+        fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40sabesan96')
             .then((res) => res.json())
-            .then((json) => {
+            .then((json) => 
+            {
 
                 this.setState({
                     isLoading: false,
@@ -31,8 +35,9 @@ export default class Blog extends React.Component {
             });
     }
 
-    render() {
-        const { isLoading, feed, items } = this.state;
+    render() 
+    {
+        const { isLoading, items } = this.state;
 
         return (
             <Layout>
@@ -45,7 +50,8 @@ export default class Blog extends React.Component {
                         ) :
                         (
                             <Card.Group>
-                                {items.map((item, i) => {
+                                {items.map((item, i) => 
+                                {
                                     return (
                                         <Card key={i} fluid>
                                             <Image src={item.thumbnail} wrapped ui={false} />
@@ -57,7 +63,7 @@ export default class Blog extends React.Component {
                                                     </span>
                                                 </Card.Meta>
                                                 <Card.Description>
-                                                    <Link to={`/blog/${item.guid.replace("https://medium.com/p/", "")}`}>Read Article</Link>
+                                                    <Link to={`/blog/${item.guid.replace('https://medium.com/p/', '')}`}>Read Article</Link>
 
                                                 </Card.Description>
                                             </Card.Content>
@@ -66,9 +72,10 @@ export default class Blog extends React.Component {
                                                     <Icon name="user" />
                                                     {item.author}
                                                 </a>
-                                                <p style={{ float: "right" }}>
+                                                <p style={{ float: 'right' }}>
                                                     <Icon name="tags" />
-                                                    {item.categories.map((category, i) => {
+                                                    {item.categories.map((category, i) => 
+                                                    {
                                                         return (<span key={i}> {category}</span>);
                                                     })}
                                                 </p>

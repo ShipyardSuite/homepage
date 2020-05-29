@@ -1,13 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Menu, Container, Segment, Header, Grid } from "semantic-ui-react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Container, Header, Grid } from 'semantic-ui-react';
 
-import { PageHeader, PageFooter } from "./../";
+import { PageHeader, PageFooter } from './../';
 
 //import './Layout.sass';
 
-export default class Layout extends React.Component {
-    constructor(props) {
+export default class Layout extends React.Component
+{
+    constructor(props) 
+    {
         super(props);
 
         this.state = {
@@ -15,34 +17,38 @@ export default class Layout extends React.Component {
         };
     }
 
-    componentDidMount() {
-        document.title = "ShipyardSuite | Home";
+    componentDidMount() 
+    {
+        document.title = 'ShipyardSuite | Home';
 
-        window.addEventListener("scroll", this.parallaxShift.bind(this));
+        window.addEventListener('scroll', this.parallaxShift.bind(this));
     }
 
-    componentWillUnmount() {
-        window.removeEventListener("scroll", this.parallaxShift.bind(this));
+    componentWillUnmount() 
+    {
+        window.removeEventListener('scroll', this.parallaxShift.bind(this));
     }
 
-    parallaxShift() {
+    parallaxShift() 
+    {
         this.setState({
             offset: window.pageYOffset / 2
         });
     }
 
-    render() {
+    render() 
+    {
         const { fluid, isHome } = this.props;
 
         return (
-            <div style={{ display: "flex", minHeight: "100vh", flexDirection: "column" }}>
+            <div style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
                 {
                     isHome ? (
                         <header
                             className="header-background"
                             style={{
                                 backgroundPositionY: this.state.offset,
-                                height: "80vh"
+                                height: '80vh'
                             }}
                         >
                             <PageHeader isHome={isHome} />
@@ -80,3 +86,10 @@ export default class Layout extends React.Component {
         );
     }
 }
+
+Layout.propTypes = {
+    fluid: PropTypes.bool,
+    isHome: PropTypes.bool,
+    children: PropTypes.array
+};
+
