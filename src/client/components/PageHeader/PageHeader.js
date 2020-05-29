@@ -1,5 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import {
     Segment,
     Container,
@@ -7,16 +8,18 @@ import {
     Icon,
     Image,
     Button,
-} from "semantic-ui-react";
+} from 'semantic-ui-react';
 
-import "./PageHeader.sass";
+import './PageHeader.sass';
 
-export default class PageHeader extends React.Component {
-    render() {
+export default class PageHeader extends React.Component
+{
+    render()
+    {
         const { isHome } = this.props;
 
         return (
-            <Segment inverted className={`PageHeader ${isHome ? "home" : ""}`}>
+            <Segment inverted className={`PageHeader ${isHome ? 'home' : ''}`}>
                 <Container fluid>
                     <Menu
                         stackable
@@ -59,3 +62,7 @@ export default class PageHeader extends React.Component {
         );
     }
 }
+
+PageHeader.propTypes = {
+    isHome: PropTypes.bool,
+};
