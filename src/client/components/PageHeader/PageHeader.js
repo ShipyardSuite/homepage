@@ -24,7 +24,7 @@ export default class PageHeader extends React.Component
          * @todo Create a function to get the browsers language
          * @body the website should automatically use the browsers language, and the front-end should have a function to change the language on-site.
          */
-        this.i18nManager = new i18nManager('de');
+        this.i18nManager = new i18nManager('en');
     }
 
     render()

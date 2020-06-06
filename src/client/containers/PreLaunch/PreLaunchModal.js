@@ -27,7 +27,7 @@ export default class PreLaunchModal extends React.Component
             modalEmailSent: false
         };
         
-        this.i18nManager = new i18nManager('de');
+        this.i18nManager = new i18nManager('en');
     }
 
     handleOpen()
