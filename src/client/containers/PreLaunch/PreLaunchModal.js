@@ -9,7 +9,7 @@ import {
 
 import { i18nManager } from '@shipyardsuite/i18n-manager';
 
-import './PrelaunchModal.sass';
+import './PreLaunchModal.sass';
 
 export default class PreLaunchModal extends React.Component 
 {
