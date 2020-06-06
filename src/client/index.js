@@ -7,8 +7,10 @@ import PreLaunch from './containers/PreLaunch/PreLaunch';
 
 document.addEventListener('DOMContentLoaded', () => 
 {
+    const prelaunch = false;
+
     ReactDOM.render(
-        process.env.PRELAUNCH_ACTIVE === 'true'? (
+        prelaunch === true? (
             <PreLaunch/>
         ) : (
             <Router>
