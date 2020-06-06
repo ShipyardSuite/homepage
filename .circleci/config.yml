@@ -68,6 +68,7 @@ jobs:
             docker build \
             --build-arg SERVICE_NAME_ARG=$SERVICE_NAME \
             --build-arg HEALTHCHECK_ID_ARG=$HEALTHCHECK_DEVELOP \
+            --build-arg PRELAUNCH_ACTIVE=$PRELAUNCH_ACTIVE \
             -t $IMAGE_NAME:develop . 
       
       # Archive Docker image
