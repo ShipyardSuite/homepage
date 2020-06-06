@@ -42,46 +42,42 @@ export default class Layout extends React.Component
 
         return (
             <div style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
-                {
-                    isHome ? (
-                        <header
-                            className="header-background"
-                            style={{
-                                backgroundPositionY: this.state.offset,
-                                height: '80vh'
-                            }}
+                {isHome ? (
+                    <header
+                        className="header-background"
+                        style={{
+                            backgroundPositionY: this.state.offset,
+                            height: '80vh'
+                        }}
+                    >
+                        <PageHeader isHome={isHome} />
+                        <section
+                            className='info-container'
+                            style={{ bottom: this.state.offset / 2 }}
                         >
-                            <PageHeader isHome={isHome} />
-                            <section
-                                className='info-container'
-                                style={{ bottom: this.state.offset / 2 }}
-                            >
-                                <Container>
-                                    <Grid>
-                                        <Grid.Row>
-                                            <Grid.Column width={6}>
-                                                <Header as="h1" inverted textAlign="center">WELCOME TEXT</Header>
-                                            </Grid.Column>
-                                            <Grid.Column width={10}>
-                                                <Header floated="right" as="h1" inverted textAlign="center">SECONDARY TEXT</Header>
-                                            </Grid.Column>
-                                        </Grid.Row>
-                                    </Grid>
-                                </Container>
-                            </section>
-                        </header>
-                    )
-                        :
-                        (
-                            <PageHeader isHome={isHome} />
-                        )
-                }
+                            <Container>
+                                <Grid>
+                                    <Grid.Row>
+                                        <Grid.Column width={6}>
+                                            <Header as="h1" inverted textAlign="center">WELCOME TEXT</Header>
+                                        </Grid.Column>
+                                        <Grid.Column width={10}>
+                                            <Header floated="right" as="h1" inverted textAlign="center">SECONDARY TEXT</Header>
+                                        </Grid.Column>
+                                    </Grid.Row>
+                                </Grid>
+                            </Container>
+                        </section>
+                    </header>
+                ) : (
+                    <PageHeader isHome={isHome} />
+                )}
                 <div style={{ flex: 1 }}>
                     <Container fluid={fluid}>
                         {this.props.children}
                     </Container>
                 </div>
-                <PageFooter />
+                <PageFooter/>
             </div>
         );
     }

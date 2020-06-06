@@ -51,6 +51,7 @@ services:
         environment:
             SERVICE_PORT: ${SERVICE_PORT}
             SERVICE_NAME: ${SERVICE_NAME}
+            PRELAUNCH_ACTIVE: ${PRELAUNCH_ACTIVE}
 
     player:
         image: shipyardsuite/player:develop

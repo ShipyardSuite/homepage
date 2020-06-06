@@ -26,7 +26,6 @@ export default class Blog extends React.Component
             .then((res) => res.json())
             .then((json) => 
             {
-
                 this.setState({
                     isLoading: false,
                     feed: json.feed,
@@ -42,49 +41,46 @@ export default class Blog extends React.Component
         return (
             <Layout>
                 <Container>
-                    {isLoading ?
-                        (
-                            <Segment basic>
-                                <Loader active inline="centered" />
-                            </Segment>
-                        ) :
-                        (
-                            <Card.Group>
-                                {items.map((item, i) => 
-                                {
-                                    return (
-                                        <Card key={i} fluid>
-                                            <Image src={item.thumbnail} wrapped ui={false} />
-                                            <Card.Content>
-                                                <Card.Header>{item.title}</Card.Header>
-                                                <Card.Meta>
-                                                    <span className="date">
-                                                        {moment(item.pubDate).fromNow()}
-                                                    </span>
-                                                </Card.Meta>
-                                                <Card.Description>
-                                                    <Link to={`/blog/${item.guid.replace('https://medium.com/p/', '')}`}>Read Article</Link>
-
-                                                </Card.Description>
-                                            </Card.Content>
-                                            <Card.Content extra>
-                                                <a>
-                                                    <Icon name="user" />
-                                                    {item.author}
-                                                </a>
-                                                <p style={{ float: 'right' }}>
-                                                    <Icon name="tags" />
-                                                    {item.categories.map((category, i) => 
-                                                    {
-                                                        return (<span key={i}> {category}</span>);
-                                                    })}
-                                                </p>
-                                            </Card.Content>
-                                        </Card>
-                                    );
-                                })}
-                            </Card.Group>
-                        )}
+                    {isLoading ? (
+                        <Segment basic>
+                            <Loader active inline="centered" />
+                        </Segment>
+                    ) : (
+                        <Card.Group>
+                            {items.map((item, i) =>
+                            {
+                                return (
+                                    <Card key={i} fluid>
+                                        <Image src={item.thumbnail} wrapped ui={false} />
+                                        <Card.Content>
+                                            <Card.Header>{item.title}</Card.Header>
+                                            <Card.Meta>
+                                                <span className="date">
+                                                    {moment(item.pubDate).fromNow()}
+                                                </span>
+                                            </Card.Meta>
+                                            <Card.Description>
+                                                <Link to={`/blog/${item.guid.replace('https://medium.com/p/', '')}`}>Read Article</Link>
+                                            </Card.Description>
+                                        </Card.Content>
+                                        <Card.Content extra>
+                                            <a>
+                                                <Icon name="user" />
+                                                {item.author}
+                                            </a>
+                                            <p style={{ float: 'right' }}>
+                                                <Icon name="tags" />
+                                                {item.categories.map((category, i) => 
+                                                {
+                                                    return (<span key={i}> {category}</span>);
+                                                })}
+                                            </p>
+                                        </Card.Content>
+                                    </Card>
+                                );
+                            })}
+                        </Card.Group>
+                    )}
                     <br />
                 </Container>
             </Layout>
