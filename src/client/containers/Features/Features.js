@@ -11,7 +11,7 @@ export default class Features extends React.Component
     }
 
     render()
-    {
+    {   
         return (
             <Layout>
                 <div className="page">FEATURES</div>

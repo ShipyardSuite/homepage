@@ -1,9 +1,11 @@
 const nodeExternals = require("webpack-node-externals");
-
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 const path = require("path");
 
+const smp = new SpeedMeasurePlugin();
+
 module.exports = () => {
-    return {
+    return smp.wrap({
         context: __dirname,
         mode: "production",
         name: "server",
@@ -25,6 +27,7 @@ module.exports = () => {
                     use: ["babel-loader"]
                 }
             ]
-        }
-    };
+        },
+        plugins: []
+    });
 };

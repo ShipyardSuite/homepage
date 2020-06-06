@@ -195,5 +195,3 @@ workflows:
           context: dockerhub
           requires:
             - build-latest
-
-  

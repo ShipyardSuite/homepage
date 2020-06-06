@@ -1,11 +1,14 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const Dotenv = require('dotenv-webpack');
 const path = require("path");
 
+const smp = new SpeedMeasurePlugin();
 const serviceName = process.env.SERVICE_NAME;
 
 module.exports = () => {
-    return {
+    return smp.wrap({
         context: __dirname,
         mode: "production",
         name: "client",
@@ -75,6 +78,7 @@ module.exports = () => {
                     },
                 ],
             }),
+            new Dotenv()
         ]
-    };
+    });
 };

@@ -67,43 +67,41 @@ export default class BlogPost extends React.Component
             <Layout fluid>
                 <Image src={post.thumbnail} />
                 <Container>
-                    {isLoading ?
-                        (
-                            <Segment basic>
-                                <Loader active inline="centered" />
-                            </Segment>
-                        ) :
-                        (
-                            <Card fluid>
-                                <Card.Content>
-                                    <Card.Header>{post.title}</Card.Header>
-                                    <Card.Meta>
-                                        <span className="date">
-                                            {moment(post.pubDate).fromNow()}
-                                        </span>
-                                    </Card.Meta>
-                                    <Card.Description
-                                        className="mediumContent"
-                                        dangerouslySetInnerHTML={{ __html: post.content }}
-                                    />
-                                </Card.Content>
-                                <Card.Content extra>
-                                    <a>
-                                        <Icon name="user" />
-                                        {post.author}
-                                    </a>
-                                    {post.categories &&
-                                        <p style={{ float: 'right' }}>
-                                            <Icon name="tags" />
-                                            {post.categories.map((category, i) => 
-                                            {
-                                                return (<span key={i}> {category}</span>);
-                                            })}
-                                        </p>
-                                    }
-                                </Card.Content>
-                            </Card>
-                        )}
+                    {isLoading ? (
+                        <Segment basic>
+                            <Loader active inline="centered" />
+                        </Segment>
+                    ) : (
+                        <Card fluid>
+                            <Card.Content>
+                                <Card.Header>{post.title}</Card.Header>
+                                <Card.Meta>
+                                    <span className="date">
+                                        {moment(post.pubDate).fromNow()}
+                                    </span>
+                                </Card.Meta>
+                                <Card.Description
+                                    className="mediumContent"
+                                    dangerouslySetInnerHTML={{ __html: post.content }}
+                                />
+                            </Card.Content>
+                            <Card.Content extra>
+                                <a>
+                                    <Icon name="user" />
+                                    {post.author}
+                                </a>
+                                {post.categories && (
+                                    <p style={{ float: 'right' }}>
+                                        <Icon name="tags" />
+                                        {post.categories.map((category, i) => 
+                                        {
+                                            return (<span key={i}> {category}</span>);
+                                        })}
+                                    </p>
+                                )}
+                            </Card.Content>
+                        </Card>
+                    )}
                     <br />
                 </Container>
             </Layout>
