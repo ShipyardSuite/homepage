@@ -53,7 +53,7 @@ export default class PageHeader extends React.Component
                         <Menu.Item as={Link} to="/features">{this.i18nManager.message('layout.headerMenu.features').toUpperCase()}</Menu.Item>
                         <Menu.Item as={Link} to="/blog">{this.i18nManager.message('layout.headerMenu.blog').toUpperCase()}</Menu.Item>
                         <Menu.Item href={`http://${window.location.host}/documentation/`}>{this.i18nManager.message('layout.headerMenu.documentation').toUpperCase()}</Menu.Item>
-                        <Menu.Item href={`http://${window.location.host}/status/`}>{this.i18nManager.message('layout.headerMenu.status').toUpperCase()}</Menu.Item>
+                        <Menu.Item href={`https://shipyardsuite-${ 'develop' }.statuspage.io/`} target='_blank'>{this.i18nManager.message('layout.headerMenu.status').toUpperCase()}</Menu.Item>
 
                         <Menu.Menu position="right">
                             <Menu.Item>
