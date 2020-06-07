@@ -7,7 +7,7 @@ export default class Features extends React.Component
 
     componentDidMount() 
     {
-        document.title = 'ShipyardSuite | 404 - Not found';
+        document.title = 'ShipyardSuite | Features';
     }
 
     render()

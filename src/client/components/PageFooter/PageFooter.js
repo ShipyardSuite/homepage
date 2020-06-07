@@ -1,6 +1,8 @@
 import React from 'react';
 import { Segment, Icon } from 'semantic-ui-react';
 
+import { copyrightYear, serviceStatus } from './../../utils';
+
 export default class PageFooter extends React.Component 
 {
     constructor(props) 
@@ -18,28 +20,8 @@ export default class PageFooter extends React.Component
             .then((res) => res.json())
             .then((json) =>
             {
-                let stateColor;
-
-                console.log(json.status.indicator);
-
-                switch(json.status.indicator)
-                {
-                case 'minor':
-                    stateColor = 'green';
-                    break;
-                case 'major':
-                    stateColor = 'yellow';
-                    break;
-                case 'critical':
-                    stateColor = 'red';
-                    break;
-                case 'none':
-                    stateColor = 'grey';
-                    break;
-                }
-
                 this.setState({
-                    onlineState: stateColor
+                    onlineState: json.status.indicator
                 });
             });
     }
@@ -55,7 +37,8 @@ export default class PageFooter extends React.Component
         return (
             <div>
                 <Segment secondary basic className="footer" textAlign="center">
-                    © {new Date().getFullYear()} ShipyardSuite | <span>Status <Icon color={onlineState} name='circle' /></span>
+                    © {copyrightYear(2020, new Date().getFullYear())} ShipyardSuite | 
+                    Status <Icon color={serviceStatus(onlineState)} name='circle' />
                 </Segment>
             </div>
         );
