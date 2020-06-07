@@ -17,8 +17,12 @@ export default class PreLaunch extends React.Component
     constructor(props) 
     {
         super(props);
-        
-        this.i18nManager = new i18nManager('en');
+
+        this.state = {
+            language: navigator.language.slice(0,2) || 'en'
+        };
+
+        this.i18nManager = new i18nManager(this.state.language);
     }
 
     componentDidMount()

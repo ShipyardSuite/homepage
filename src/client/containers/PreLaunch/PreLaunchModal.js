@@ -24,10 +24,11 @@ export default class PreLaunchModal extends React.Component
             modalFirstName: '',
             modalLastName: '',
             modalEmail: '',
-            modalEmailSent: false
+            modalEmailSent: false,
+            language: navigator.language.slice(0,2) || 'en'
         };
-        
-        this.i18nManager = new i18nManager('en');
+
+        this.i18nManager = new i18nManager(this.state.language);
     }
 
     handleOpen()
