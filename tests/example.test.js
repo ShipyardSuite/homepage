@@ -65,9 +65,9 @@ describe('Server utilities', () =>
 {
     describe('exampleFunction()',  () => 
     {
-        it('output should equal "testService"', () =>
+        it('output should equal "homepage"', () =>
         {
-            expect(exampleFunction()).to.equal('testService');
+            expect(exampleFunction()).to.equal('homepage');
         });
     });
 });
