@@ -18,6 +18,7 @@ ENV NODE_ENV=${NODE_ENV_ARG}
 
 COPY . /usr/src/app/
 RUN npm install
+RUN apk --update --no-cache add curl
 
 ARG CACHEBUST=1
 CMD [ "npm", "start" ]
